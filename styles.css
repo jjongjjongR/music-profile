@@ -111,8 +111,8 @@ a {
   grid-template-columns: minmax(300px, 0.92fr) minmax(340px, 1.08fr);
   align-items: center;
   gap: clamp(1.8rem, 4vw, 4rem);
-  min-height: min(78vh, 720px);
-  padding: clamp(1.4rem, 3vw, 2.2rem);
+  min-height: min(70vh, 640px);
+  padding: clamp(1.2rem, 2.6vw, 1.8rem);
 }
 
 .hero::before,
@@ -421,8 +421,6 @@ a {
 }
 
 .album-section {
-  z-index: 2;
-  margin-top: clamp(-1.5rem, -1.2vw, -0.85rem);
   padding: clamp(1.25rem, 3vw, 2rem);
 }
 
@@ -578,10 +576,6 @@ a {
   .hero {
     gap: 1.3rem;
     min-height: auto;
-  }
-
-  .album-section {
-    margin-top: 0.9rem;
   }
 
   .hero-title {
