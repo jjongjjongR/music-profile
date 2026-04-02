@@ -1,7 +1,7 @@
 const siteData = {
   artist: {
     name: "Notion",
-    tagline: "공식 음악 링크",
+    tagline: "아티스트 Notion 페이지",
     photo: "assets/profile-placeholder.jpg",
     socialLinks: [
       {
@@ -178,10 +178,6 @@ function buildHeroSection(artist) {
   tagline.className = "hero-tagline";
   tagline.textContent = artist.tagline;
 
-  const description = document.createElement("p");
-  description.className = "hero-description";
-  description.textContent = "Email = sx0123@naver.com";
-
   const contactWrap = document.createElement("div");
   contactWrap.className = "hero-contact";
 
@@ -240,7 +236,7 @@ function buildHeroSection(artist) {
     socialLinks.append(link);
   });
 
-  content.append(eyebrow, titleGroup, description, contactWrap, socialLinks);
+  content.append(eyebrow, titleGroup, contactWrap, socialLinks);
   section.append(media, content);
 
   return section;

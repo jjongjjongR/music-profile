@@ -111,7 +111,7 @@ a {
   grid-template-columns: minmax(300px, 0.92fr) minmax(340px, 1.08fr);
   align-items: center;
   gap: clamp(1.8rem, 4vw, 4rem);
-  min-height: min(92vh, 860px);
+  min-height: min(78vh, 720px);
   padding: clamp(1.4rem, 3vw, 2.2rem);
 }
 
@@ -236,7 +236,7 @@ a {
 
 .hero-contact {
   display: grid;
-  gap: 0.85rem;
+  gap: 0.7rem;
 }
 
 .contact-card {
@@ -244,7 +244,7 @@ a {
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  padding: 0.95rem 1rem;
+  padding: 0.78rem 0.9rem;
   border: 1px solid var(--line);
   border-radius: var(--radius-md);
   background:
@@ -260,9 +260,9 @@ a {
   background: rgba(var(--accent-rgb), 0.1);
   color: var(--text);
   font: inherit;
-  font-size: 0.9rem;
+  font-size: 0.82rem;
   font-weight: 700;
-  padding: 0.72rem 1rem;
+  padding: 0.62rem 0.9rem;
   cursor: pointer;
   transition:
     border-color var(--transition),
@@ -278,13 +278,13 @@ a {
 
 .contact-meta {
   display: grid;
-  gap: 0.2rem;
+  gap: 0.14rem;
   min-width: 0;
 }
 
 .contact-label {
   color: var(--text-muted);
-  font-size: 0.82rem;
+  font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -292,7 +292,7 @@ a {
 
 .contact-value {
   color: var(--text);
-  font-size: 0.98rem;
+  font-size: 0.9rem;
   font-weight: 600;
   word-break: break-all;
 }
@@ -392,6 +392,8 @@ a {
 }
 
 .album-section {
+  z-index: 2;
+  margin-top: clamp(-1.5rem, -1.2vw, -0.85rem);
   padding: clamp(1.25rem, 3vw, 2rem);
 }
 
@@ -508,6 +510,7 @@ a {
   .hero {
     grid-template-columns: 1fr;
     padding-top: 1.5rem;
+    min-height: auto;
   }
 
   .hero-media,
@@ -545,6 +548,11 @@ a {
 
   .hero {
     gap: 1.3rem;
+    min-height: auto;
+  }
+
+  .album-section {
+    margin-top: 0.9rem;
   }
 
   .hero-title {
@@ -560,6 +568,7 @@ a {
   .contact-card {
     flex-direction: column;
     align-items: stretch;
+    gap: 0.75rem;
   }
 
   .contact-copy {
