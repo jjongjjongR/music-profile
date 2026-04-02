@@ -109,6 +109,7 @@ const siteData = {
 };
 
 const app = document.querySelector("#app");
+const COPY_RESET_DELAY = 1800;
 
 const fallbackPalette = {
   artist: {
@@ -179,8 +180,43 @@ function buildHeroSection(artist) {
 
   const description = document.createElement("p");
   description.className = "hero-description";
-  description.textContent =
-    "Notion의 음악과 발매작을 한곳에서 들을 수 있는 링크 페이지입니다.";
+  description.textContent = "Email = sx0123@naver.com";
+
+  const contactWrap = document.createElement("div");
+  contactWrap.className = "hero-contact";
+
+  const contactCard = document.createElement("div");
+  contactCard.className = "contact-card";
+
+  const contactMeta = document.createElement("div");
+  contactMeta.className = "contact-meta";
+
+  const contactLabel = document.createElement("span");
+  contactLabel.className = "contact-label";
+  contactLabel.textContent = "Email";
+
+  const contactValue = document.createElement("span");
+  contactValue.className = "contact-value";
+
+  const contactEntry = artist.socialLinks.find((item) =>
+    item.url.startsWith("mailto:")
+  );
+  const emailAddress = contactEntry
+    ? contactEntry.url.replace(/^mailto:/, "")
+    : "sx0123@naver.com";
+
+  contactValue.textContent = emailAddress;
+  contactMeta.append(contactLabel, contactValue);
+
+  const copyButton = document.createElement("button");
+  copyButton.type = "button";
+  copyButton.className = "contact-copy";
+  copyButton.textContent = "이메일 복사";
+  copyButton.setAttribute("aria-label", `${emailAddress} 이메일 복사`);
+  copyButton.dataset.email = emailAddress;
+
+  contactCard.append(contactMeta, copyButton);
+  contactWrap.append(contactCard);
 
   titleGroup.append(title, tagline);
 
@@ -189,6 +225,10 @@ function buildHeroSection(artist) {
   socialLinks.setAttribute("role", "list");
 
   artist.socialLinks.forEach((item) => {
+    if (item.url.startsWith("mailto:")) {
+      return;
+    }
+
     const link = createExternalLink(
       item.label,
       item.url,
@@ -196,15 +236,11 @@ function buildHeroSection(artist) {
       `${artist.name} ${item.label} 새 탭에서 열기`
     );
 
-    if (item.label === "Contact") {
-      link.classList.add("link-button--wide");
-    }
-
     link.setAttribute("role", "listitem");
     socialLinks.append(link);
   });
 
-  content.append(eyebrow, titleGroup, description, socialLinks);
+  content.append(eyebrow, titleGroup, description, contactWrap, socialLinks);
   section.append(media, content);
 
   return section;
@@ -218,21 +254,17 @@ function buildAlbumSection(albums) {
   const header = document.createElement("div");
   header.className = "section-header";
 
-  const kicker = document.createElement("p");
-  kicker.className = "section-kicker";
-  kicker.textContent = "발매작";
-
   const title = document.createElement("h2");
   title.className = "section-title";
   title.id = "albums-heading";
-  title.textContent = "감상하기";
+  title.textContent = "앨범";
 
   const copy = document.createElement("p");
   copy.className = "section-copy";
   copy.textContent =
     "원하는 플랫폼에서 바로 감상할 수 있도록 발매작 링크를 정리했습니다.";
 
-  header.append(kicker, title, copy);
+  header.append(title, copy);
 
   const grid = document.createElement("div");
   grid.className = "album-grid";
@@ -372,6 +404,33 @@ function renderSite() {
   app.innerHTML = "";
   app.append(fragment);
   attachImageFallbacks();
+  attachCopyHandlers();
+}
+
+function attachCopyHandlers() {
+  const copyButtons = document.querySelectorAll(".contact-copy");
+
+  copyButtons.forEach((button) => {
+    button.addEventListener("click", async () => {
+      const email = button.dataset.email;
+      if (!email) {
+        return;
+      }
+
+      const originalText = button.textContent;
+
+      try {
+        await navigator.clipboard.writeText(email);
+        button.textContent = "복사됨";
+      } catch (error) {
+        button.textContent = "복사 실패";
+      }
+
+      window.setTimeout(() => {
+        button.textContent = originalText;
+      }, COPY_RESET_DELAY);
+    });
+  });
 }
 
 renderSite();
