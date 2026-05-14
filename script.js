@@ -13,11 +13,7 @@ const siteData = {
         url: "https://www.youtube.com/channel/UCXOBQAI3S_CO17Yx_9UGobg"
       },
       {
-        label: "Instagram",
-        url: "https://www.instagram.com/notion_00"
-      },
-      {
-        label: "Prelo Instagram",
+        label: "instagram",
         url: "https://www.instagram.com/prelo_ok"
       },
       {
